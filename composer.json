@@ -1,0 +1,24 @@
+{
+    "name": "jacklin/request-box-sdk",
+    "description": "use 7723 request box sdk",
+    "type": "library",
+    "require": {
+        "php-curl-class/php-curl-class": "^7.2",
+        "jacklin/sign": "^1.2.0"
+    },
+    "require-dev": {
+        "php-curl-class/php-curl-class": "^7.2"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Lin Jiancheng",
+            "email": "jacklin@shouyiren.net"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "BaZhangApiTools": "src/"
+        }
+    }
+}
