@@ -46,14 +46,14 @@ class RequestClient
 			$this->getCurl()->setHeaders($request->getRequestHeader());
 			switch (strtolower($this->apiRequestType)) {
 				case 'post':
-					$this->response[$api_uri] = $this->getCurl()->post($request_url, $request->getRequestBody(),$this->follow303WithPost);
+					$this->response[$api_uri] = $this->curl->post($request_url, $request->getRequestBody(),$this->follow303WithPost);
 					break;
 				default:
-					$this->response[$api_uri] = $this->getCurl()->get($request_url, $request->getRequestBody());
+					$this->response[$api_uri] = $this->curl->get($request_url, $request->getRequestBody());
 					break;
 			}
-			if ($this->getCurl()->error) {
-				$this->error[$api_uri] = $this->getCurl()->error;
+			if ($this->curl->error) {
+				$this->error[$api_uri] = $this->curl->error;
 			}
 		}
 		return $this;
@@ -121,8 +121,8 @@ class RequestClient
 		return isset($this->error[$api_uri]) ? $this->error[$api_uri] : array();
 	}
 	public function __call($name, $arguments){
-		if (method_exists($this->getCurl(), $name)) {
-			return call_user_func_array(array($this->getCurl(),$name), $arguments);
+		if (method_exists($this->curl, $name)) {
+			return call_user_func_array(array($this->curl,$name), $arguments);
 		}else{
 			throw new \Exception("请求方法名格式不存在");
 		}
