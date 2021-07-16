@@ -26,7 +26,7 @@ class RequestClient
 		$this->apiRequestType = $api_request_type;
 		$this->apiUrl = $api_url;
 		$this->apiVer = $api_ver;
-		$this->curl = $this->getCurl();
+		$this->curl = new Curl();
 	}
 	/**
 	 * 设置支持post跟随请求
@@ -43,7 +43,7 @@ class RequestClient
 		$api_uri = $request->getApiUri();
 		$request_url = $this->parseApiUrl($api_uri);
 		if ($request_url !== false) {
-			$this->getCurl()->setHeaders($request->getRequestHeader());
+			$this->curl->setHeaders($request->getRequestHeader());
 			switch (strtolower($this->apiRequestType)) {
 				case 'post':
 					$this->response[$api_uri] = $this->curl->post($request_url, $request->getRequestBody(),$this->follow303WithPost);
@@ -126,24 +126,5 @@ class RequestClient
 		}else{
 			throw new \Exception("请求方法名格式不存在");
 		}
-	}
-	/**
-	 * 获取curl实例
-	 * BaZhang Platform
-	 * @Author   Jacklin@shouyiren.net
-	 * @DateTime 2021-07-14T11:52:38+0800
-	 * @return   [type]                   [description]
-	 */
-	private function getCurl(){
-		if ((version_compare(PHP_VERSION, '5.5.11') < 0) || defined('HHVM_VERSION')) {
-				$this->curl = new Curl();
-		}else{
-			if ($this->curl instanceof Curl ) {
-				
-			}else{
-				$this->curl = new Curl();
-			}
-		}
-		return $this->curl;
 	}
 }
