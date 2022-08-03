@@ -36,7 +36,7 @@ class RequestContent
 		$this->headerData['enable-base64'] = isset($data['enable-base64']) ? : '';
 		$this->headerData['sign-type'] = isset($data['sign-type']) ? $data['sign-type'] : '';
 		$this->headerData['charset'] = isset($data['charset']) ? $data['charset'] : 'utf8';
-		$this->headerData['method'] = isset($data['method']) ? $data['method'] : strpos('/', $this->apiUri) ? str_replace('/', '.', $this->apiUri) : $this->apiUri;
+		$this->headerData['method'] = isset($data['method']) ? $data['method'] : (strpos('/', $this->apiUri) ? str_replace('/', '.', $this->apiUri) : $this->apiUri);
 		$this->headerData = array_merge($this->headerData,$data);
 		return $this;
 	}
