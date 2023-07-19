@@ -103,6 +103,9 @@ class RequestClient
 			$this->error = "uri 格式错误";
 			return false;
 		}
+		if (empty($this->apiVer)) {
+			return $this->apiUrl.'/'.$api_uri;
+		}
 		return $this->apiUrl.'/'.$this->apiVer.'/'.$api_uri;
 	}
 	/**
